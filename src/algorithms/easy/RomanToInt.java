@@ -1,30 +1,14 @@
 package algorithms.easy;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class RomanToInt {
-
-    private Map<String, Integer> romanIntMapping = new HashMap<>();
-
-    {
-        romanIntMapping.put("I", 1);
-        romanIntMapping.put("V", 5);
-        romanIntMapping.put("X", 10);
-        romanIntMapping.put("L", 50);
-        romanIntMapping.put("C", 100);
-        romanIntMapping.put("D", 500);
-        romanIntMapping.put("M", 1000);
-    }
 
     public int romanToInt(String s) {
         int intNumber = 0;
         if (s.length() > 1) {
-            String currentCharacter = s.substring(s.length() - 1);
-            int current;
             int last = 0;
             for (int i = s.length() - 1; i >= 0; i--) {
-                current = mapSingleRomanToInt(currentCharacter);
+                String currentCharacter = s.substring(i, i + 1);
+                int current = mapSingleRomanToInt(currentCharacter);
                 if (current >= last) {
                     intNumber += current;
                 } else {
@@ -39,6 +23,15 @@ public class RomanToInt {
     }
 
     private int mapSingleRomanToInt(String romanDigit) {
-        return romanIntMapping.get(romanDigit);
+        switch (romanDigit) {
+            case "I" : return 1;
+            case "V" : return 5;
+            case "X" : return 10;
+            case "L" : return 50;
+            case "C" : return 100;
+            case "D" : return 500;
+            case "M" : return 1000;
+        }
+        return 0;
     }
 }
