@@ -32,33 +32,25 @@ public class RomanToInt {
 
     public int romanToInt(String s) {
         int intNumber = 0;
-        if (s.length() > 1) {
-            int last = 0;
-            for (int i = s.length() - 1; i >= 0; i--) {
-                int current = mapSingleRomanToInt(s.substring(i, i + 1));
-                if (current >= last) {
-                    intNumber += current;
-                    last = current;
-                } else {
-                    intNumber -= current;
-                }
+        int last = 0;
+        int current = 0;
+        for (int i = s.length() - 1; i >= 0; i--) {
+            switch (s.charAt(i)) {
+                case 'I': current = 1; break;
+                case 'V': current = 5; break;
+                case 'X': current = 10; break;
+                case 'L': current = 50; break;
+                case 'C': current = 100; break;
+                case 'D': current = 500; break;
+                case 'M': current = 1000;
             }
-        } else {
-            return mapSingleRomanToInt(s);
+            if (current >= last) {
+                intNumber += current;
+                last = current;
+            } else {
+                intNumber -= current;
+            }
         }
         return intNumber;
-    }
-
-    private int mapSingleRomanToInt(String romanDigit) {
-        switch (romanDigit) {
-            case "I" : return 1;
-            case "V" : return 5;
-            case "X" : return 10;
-            case "L" : return 50;
-            case "C" : return 100;
-            case "D" : return 500;
-            case "M" : return 1000;
-        }
-        return 0;
     }
 }
