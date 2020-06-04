@@ -25,24 +25,22 @@ public class ReverseInteger {
     //
     // For the purpose of this problem, assume that your function returns 0 when the reversed integer overflows.
     public int reverse(int x) {
+        System.out.println("input in binary: \t" + ("00000000000000000000000000000000" + Integer.toBinaryString(x)).substring(Integer.toBinaryString(x).length()));
         int reversedInt = 0;
 
-        String inputString = String.valueOf(x);
-
-        StringBuilder reversedString = new StringBuilder();
-        if (inputString.contains("-")) {
-            reversedString.append("-");
+        StringBuilder reversed = new StringBuilder();
+        if (x < 0) {
+            reversed.append("-");
         }
-        for (int i = inputString.length() - 1; i >= 0; i--) {
-            String character = inputString.substring(i, i + 1);
-            if (!character.equals("-")) {
-                reversedString.append(character);
-            }
+        while (Math.abs(x) > 0) {
+            reversed.append(Math.abs(x % 10));
+            x /= 10;
         }
         try {
-            reversedInt = Integer.parseInt(reversedString.toString());
+            reversedInt = Integer.parseInt(reversed.toString());
         } catch (NumberFormatException ignore) {}
 
+        System.out.println("output in binary: \t" + ("00000000000000000000000000000000" + Integer.toBinaryString(reversedInt)).substring(Integer.toBinaryString(reversedInt).length()));
         return reversedInt;
     }
 }
