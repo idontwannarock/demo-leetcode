@@ -23,46 +23,21 @@ public class PalindromeNumber {
     // Follow up:
     // Could you solve it without converting the integer to a string?
     public boolean isPalindrome(int x) {
-        boolean isPalindrome = true;
-        if (x >= 0) {
-            int leftBefore = 0;
-            int leftDigits = String.valueOf(x).length() - 1;
-            int rightDigits = 0;
-            while (leftDigits >= rightDigits) {
-                System.out.println("x: \t" + x);
-                int left = (x - leftBefore) / pow(leftDigits);
-                System.out.println("left: \t" + left);
-                leftBefore += (left * pow(leftDigits));
-                System.out.println("left before: \t" + leftBefore);
-                leftDigits -= 1;
-                System.out.println("left digits: \t" + leftDigits);
-
-                int right = x % pow(rightDigits + 1) / pow(rightDigits);
-                System.out.println("right: \t" + right);
-                rightDigits += 1;
-                System.out.println("right digits: \t" + rightDigits);
-                x = (x / 10) * 10;
-                System.out.println("x: \t" + x);
-
-                isPalindrome &= left == right;
-                System.out.println("current is palindrome: \t" + isPalindrome);
-                System.out.println();
-            }
-        } else {
-            isPalindrome = false;
+        if (x < 0 || (x % 10 == 0 && x != 0)) {
+            return false;
         }
-        return isPalindrome;
-    }
 
-    private int pow(int power) {
-        int result = 1;
-        for (int i = 1; i <= power; i++) {
-            result *= 10;
+        int reversed = 0;
+        while (x > reversed) {
+            reversed = reversed * 10 + x % 10;
+            x /= 10;
         }
-        return result;
+
+        return x == reversed || x == reversed / 10;
     }
 
     // 方法 1: 轉 String 然後用 substring 比較
     // 方法 2: 一樣先 reverse int 然後比較
-    // 方法 3: 利用非轉 string 的 reverse 過程，邊 reverse 邊比較？
+    // 方法 3: 利用類似非轉 string 的 reverse 過程，邊 reverse 邊比較
+    // 方法 4: reverse 一半的數字，然後比較
 }

@@ -56,6 +56,16 @@ public class PalindromeNumberTest {
     }
 
     @Test
+    public void testOneThousandAndOneShouldReturnTrue() {
+        // arrange
+        int input = 1001;
+        // action
+        boolean actual = palindromeNumber.isPalindrome(input);
+        // assert
+        assertTrue(actual);
+    }
+
+    @Test
     public void shouldReturnFalse() {
         // arrange
         int input = 1000021;
