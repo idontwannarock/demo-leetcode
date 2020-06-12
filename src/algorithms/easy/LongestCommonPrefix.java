@@ -1,6 +1,9 @@
 package algorithms.easy;
 
 import java.util.Arrays;
+import java.util.Set;
+
+import static java.util.stream.Collectors.toSet;
 
 public class LongestCommonPrefix {
 
@@ -39,5 +42,29 @@ public class LongestCommonPrefix {
             prefix = strs[0];
         }
         return prefix;
+    }
+
+    public String longestCommonPrefix2(String[] strs) {
+        System.out.println(Arrays.toString(strs));
+
+        if (strs.length == 0) {
+            return "";
+        } else if (strs.length == 1) {
+            return strs[0];
+        } else {
+            var prefix = "";
+            int index = 1;
+            try {
+                int finalIndex = index;
+                Set<String> prefixes = Arrays.stream(strs).map(str -> str.substring(0, finalIndex)).collect(toSet());
+                while (prefixes.size() == 1) {
+                    prefix = strs[0].substring(0, index);
+                    index++;
+                    int finalIndex1 = index;
+                    prefixes = Arrays.stream(strs).map(str -> str.substring(0, finalIndex1)).collect(toSet());
+                }
+            } catch (IndexOutOfBoundsException ignore) {}
+            return prefix;
+        }
     }
 }
