@@ -1,6 +1,5 @@
 package algorithms.medium;
 
-import algorithms.medium.AddTwoNumbers;
 import org.junit.Before;
 import org.junit.Test;
 
