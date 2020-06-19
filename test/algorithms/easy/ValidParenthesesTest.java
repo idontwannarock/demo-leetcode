@@ -74,4 +74,16 @@ public class ValidParenthesesTest {
         // assert
         assertTrue(actual);
     }
+
+    @Test
+    public void oneEndingBracketAndOneStartingCurlyBracketShouldReturnFalse() {
+        // arrange
+        String input = "){";
+
+        // act
+        boolean actual = validParentheses.isValid(input);
+
+        // assert
+        assertFalse(actual);
+    }
 }

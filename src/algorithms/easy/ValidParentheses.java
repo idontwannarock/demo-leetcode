@@ -42,23 +42,25 @@ public class ValidParentheses {
             if (character == '(' || character == '[' || character == '{') {
                 parentheses.push(character);
             } else if (character == ')') {
-                if (parentheses.peek() == '(') {
+                if (!parentheses.isEmpty() && parentheses.peek() == '(') {
                     parentheses.pop();
                 } else {
                     return false;
                 }
             } else if (character == ']') {
-                if (parentheses.peek() == '[') {
+                if (!parentheses.isEmpty() && parentheses.peek() == '[') {
                     parentheses.pop();
                 } else {
                     return false;
                 }
             } else if (character == '}') {
-                if (parentheses.peek() == '{') {
+                if (!parentheses.isEmpty() && parentheses.peek() == '{') {
                     parentheses.pop();
                 } else {
                     return false;
                 }
+            } else {
+                return false;
             }
         }
 
