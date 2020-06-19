@@ -16,7 +16,7 @@ public class ValidParenthesesTest {
     }
 
     @Test
-    public void aPairOfBracketsShouldReturnTrue() {
+    public void onePairOfBracketsShouldReturnTrue() {
         // arrange
         String input = "()";
 
@@ -40,7 +40,7 @@ public class ValidParenthesesTest {
     }
 
     @Test
-    public void oneBracketAndOneSquareBracketShouldReturnFalse() {
+    public void oneStartingBracketAndOneEndingSquareBracketShouldReturnFalse() {
         // arrange
         String input = "(]";
 

@@ -1,5 +1,6 @@
 package algorithms.easy;
 
+import java.util.Arrays;
 import java.util.Stack;
 
 public class ValidParentheses {
@@ -33,6 +34,34 @@ public class ValidParentheses {
     // Input: "{[]}"
     // Output: true
     public boolean isValid(String s) {
+        char[] stack = new char[s.length()];
+        int head = 0;
+        for (char c : s.toCharArray()) {
+            switch (c) {
+                case '{':
+                case '[':
+                case '(':
+                    stack[head++] = c;
+                    System.out.println("stack, " + Arrays.toString(stack) + ", with head at " + head);
+                    break;
+                case '}':
+                    if (head == 0 || stack[--head] != '{') return false;
+                    System.out.println("stack, " + Arrays.toString(stack) + ", with head at " + head);
+                    break;
+                case ')':
+                    if (head == 0 || stack[--head] != '(') return false;
+                    System.out.println("stack, " + Arrays.toString(stack) + ", with head at " + head);
+                    break;
+                case ']':
+                    if (head == 0 || stack[--head] != '[') return false;
+                    System.out.println("stack, " + Arrays.toString(stack) + ", with head at " + head);
+                    break;
+            }
+        }
+        return head == 0;
+    }
+
+    public boolean isValidStack(String s) {
         if (s.length() % 2 != 0) {
             return false;
         }
