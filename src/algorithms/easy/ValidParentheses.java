@@ -1,5 +1,7 @@
 package algorithms.easy;
 
+import java.util.Stack;
+
 public class ValidParentheses {
 
     // https://leetcode.com/problems/valid-parentheses/
@@ -34,27 +36,32 @@ public class ValidParentheses {
         if (s.length() % 2 != 0) {
             return false;
         }
-        int bracketsBalance = 0;
-        int squareBracketsBalance = 0;
-        int curlyBracketsBalance = 0;
+        Stack<Character> parentheses = new Stack<>();
         for (int index = 0; index < s.length(); index++) {
-            if (s.charAt(index) == '(') {
-                bracketsBalance += 1;
-            } else if (s.charAt(index) == ')') {
-                bracketsBalance -= 1;
-            } else if (s.charAt(index) == '[') {
-                squareBracketsBalance += 1;
-            } else if (s.charAt(index) == ']') {
-                squareBracketsBalance -= 1;
-            } else if (s.charAt(index) == '{') {
-                curlyBracketsBalance += 1;
-            } else if (s.charAt(index) == '}') {
-                curlyBracketsBalance -= 1;
-            }
-            if (bracketsBalance < 0 || squareBracketsBalance < 0 || curlyBracketsBalance < 0) {
-                return false;
+            char character = s.charAt(index);
+            if (character == '(' || character == '[' || character == '{') {
+                parentheses.push(character);
+            } else if (character == ')') {
+                if (parentheses.peek() == '(') {
+                    parentheses.pop();
+                } else {
+                    return false;
+                }
+            } else if (character == ']') {
+                if (parentheses.peek() == '[') {
+                    parentheses.pop();
+                } else {
+                    return false;
+                }
+            } else if (character == '}') {
+                if (parentheses.peek() == '{') {
+                    parentheses.pop();
+                } else {
+                    return false;
+                }
             }
         }
-        return bracketsBalance == 0 && squareBracketsBalance == 0 && curlyBracketsBalance == 0;
+
+        return parentheses.isEmpty();
     }
 }
