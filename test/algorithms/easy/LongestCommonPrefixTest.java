@@ -21,7 +21,7 @@ public class LongestCommonPrefixTest {
         String expected = "fl";
 
         // action
-        String actual = longestCommonPrefix.longestCommonPrefix(inputs);
+        String actual = longestCommonPrefix.longestCommonPrefix3(inputs);
 
         // assert
         assertEquals(expected, actual);
@@ -34,7 +34,7 @@ public class LongestCommonPrefixTest {
         String expected = "";
 
         // action
-        String actual = longestCommonPrefix.longestCommonPrefix(inputs);
+        String actual = longestCommonPrefix.longestCommonPrefix3(inputs);
 
         // assert
         assertEquals(expected, actual);
@@ -47,7 +47,7 @@ public class LongestCommonPrefixTest {
         String expected = "c";
 
         // action
-        String actual = longestCommonPrefix.longestCommonPrefix(inputs);
+        String actual = longestCommonPrefix.longestCommonPrefix3(inputs);
 
         // assert
         assertEquals(expected, actual);
@@ -60,7 +60,20 @@ public class LongestCommonPrefixTest {
         String expected = "a";
 
         // action
-        String actual = longestCommonPrefix.longestCommonPrefix(inputs);
+        String actual = longestCommonPrefix.longestCommonPrefix3(inputs);
+
+        // assert
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldReturnBlankWithNoInput() {
+        // arrange
+        String[] inputs = {};
+        String expected = "";
+
+        // action
+        String actual = longestCommonPrefix.longestCommonPrefix3(inputs);
 
         // assert
         assertEquals(expected, actual);
