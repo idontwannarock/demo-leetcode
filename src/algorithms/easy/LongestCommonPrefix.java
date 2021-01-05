@@ -3,6 +3,7 @@ package algorithms.easy;
 import java.util.Arrays;
 import java.util.Set;
 
+import static java.util.Comparator.comparingLong;
 import static java.util.stream.Collectors.toSet;
 
 public class LongestCommonPrefix {
@@ -66,5 +67,42 @@ public class LongestCommonPrefix {
             } catch (IndexOutOfBoundsException ignore) {}
             return prefix;
         }
+    }
+
+    public String longestCommonPrefix3(String[] strs) {
+        // find shortest string
+        String shortestString = findShortestString(strs);
+        // check if every strings starts with the shortest string
+        if (shortestString.length() != 0 && !isAllPrefixWith(strs, shortestString)) {
+            // the shortest string will be the answer if yes
+            // otherwise, compare shortest string without one letter on the back at a time
+            // with other strings util a match or no match
+            do {
+                shortestString = shortestString.substring(0, Math.max(0, shortestString.length() - 1));
+                if (isAllPrefixWith(strs, shortestString)) {
+                    return shortestString;
+                }
+            } while (shortestString.length() > 0);
+        }
+        return shortestString;
+    }
+
+    private String findShortestString(String[] strs) {
+        if (strs.length == 0) return "";
+        String shortestString = strs[0];
+        for (int index = 1; index < strs.length; index++) {
+            if (strs[index].length() < shortestString.length()) {
+                shortestString = strs[index];
+            }
+        }
+        return shortestString;
+    }
+
+    private boolean isAllPrefixWith(String[] strs, String shortestString) {
+        boolean isAllPrefix = true;
+        for (String str : strs) {
+            isAllPrefix &= str.startsWith(shortestString);
+        }
+        return isAllPrefix;
     }
 }
