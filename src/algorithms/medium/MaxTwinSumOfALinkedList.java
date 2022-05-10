@@ -2,25 +2,14 @@ package algorithms.medium;
 
 public class MaxTwinSumOfALinkedList {
 
-    public int pairSum(int[] linkedList) {
-        if (linkedList.length == 1) {
-            return pairSum(new ListNode(linkedList[0]));
-        }
-
-        ListNode head = new ListNode(linkedList[0]);
-        ListNode last = head;
-        for (int currentIndex = 1; currentIndex < linkedList.length; currentIndex++) {
-            ListNode current = new ListNode(linkedList[currentIndex]);
-            last.next = current;
-            last = current;
-        }
-        return pairSum(head);
-    }
-
     public int pairSum(ListNode head) {
+        // safeguard condition
+        if (head == null) return 0;
         if (head.next == null) return head.val;
         if (head.next.next == null) return head.val + head.next.val;
 
+
+        // find the end of the first half
         ListNode firstHalfEnd = head;
         ListNode end = head.next;
         while (end.next != null) {
@@ -28,23 +17,30 @@ public class MaxTwinSumOfALinkedList {
             end = end.next.next;
         }
 
+        // reverse the second half
+        ListNode secondHalfHead = reverseHead(firstHalfEnd.next);
+
+        // find max sum
         int maxSum = 0;
-
-        ListNode firstLast = firstHalfEnd.next;
-        ListNode secondLast = firstHalfEnd;
-        while (secondLast.next != null) {
-            ListNode firstCurrent = head;
-            while (!firstCurrent.next.equals(firstLast)) {
-                firstCurrent = firstCurrent.next;
-            }
-            firstLast = firstCurrent;
-
-            secondLast = secondLast.next;
-
-            maxSum = Math.max(maxSum, firstLast.val + secondLast.val);
+        while (secondHalfHead != null) {
+            maxSum = Math.max(maxSum, head.val + secondHalfHead.val);
+            head = head.next;
+            secondHalfHead = secondHalfHead.next;
         }
 
         return maxSum;
+    }
+
+    private ListNode reverseHead(ListNode node) {
+        ListNode current = node;
+        ListNode next = null;
+        while (current != null) {
+            ListNode temp = current.next;
+            current.next = next;
+            next = current;
+            current = temp;
+        }
+        return next;
     }
 }
 

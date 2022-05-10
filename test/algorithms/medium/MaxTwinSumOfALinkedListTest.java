@@ -18,7 +18,7 @@ public class MaxTwinSumOfALinkedListTest {
         int expected = 6;
 
         // act
-        int actual = new MaxTwinSumOfALinkedList().pairSum(linkedList);
+        int actual = pairSum(linkedList);
 
         // assert
         Assert.assertEquals(expected, actual);
@@ -31,7 +31,7 @@ public class MaxTwinSumOfALinkedListTest {
         int expected = 7;
 
         // act
-        int actual = new MaxTwinSumOfALinkedList().pairSum(linkedList);
+        int actual = pairSum(linkedList);
 
         // assert
         Assert.assertEquals(expected, actual);
@@ -46,9 +46,24 @@ public class MaxTwinSumOfALinkedListTest {
         int expected = 199404;
 
         // act
-        int actual = new MaxTwinSumOfALinkedList().pairSum(linkedList);
+        int actual = pairSum(linkedList);
 
         // assert
         Assert.assertEquals(expected, actual);
+    }
+
+    private int pairSum(int[] linkedList) {
+        if (linkedList.length == 1) {
+            return new MaxTwinSumOfALinkedList().pairSum(new ListNode(linkedList[0]));
+        }
+
+        ListNode head = new ListNode(linkedList[0]);
+        ListNode last = head;
+        for (int currentIndex = 1; currentIndex < linkedList.length; currentIndex++) {
+            ListNode current = new ListNode(linkedList[currentIndex]);
+            last.next = current;
+            last = current;
+        }
+        return new MaxTwinSumOfALinkedList().pairSum(head);
     }
 }
